@@ -47,12 +47,20 @@ clearButton.addEventListener('click', e => {
 })
 
 //add controls to the listed items
-function editItems(todos) {
+function editItems(itemName) {
 
     const items = itemList.querySelectorAll('.item')//select the list of items
 
     items.forEach(item => {
 
+        if(item.textContent == itemName)
+        // item.querySelector('.delete-item').addEventListener('click', e => {
+        //     //console.log(`yes`);
+            
+        //     todos.splice(item, 1)
+        //     showItems(todos)
+        //     console.log(todos);
+        // })
         
 
         console.log(item); //returns item HTML
