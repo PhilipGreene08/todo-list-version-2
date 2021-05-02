@@ -8,78 +8,86 @@ const feedback = document.querySelector('.feedback')
 
 let todos = []
 
-//add item to array
+//add item to todo array
 form.addEventListener('submit', e => {
-
     e.preventDefault()
     const newItem = itemInput.value
-    if (newItem == ``) {
-        const alert = document.querySelector('.alert')
-        alert.textContent = `enter todo`
-        alert.classList.add(`showItem`, `alert-danger`)
-        setTimeout(function () {
-            alert.classList.remove('showItem')
-        }, 3000)
-        console.log(`error`);
-    } else {
-        todos.push(newItem)
-        itemInput.value = ``
-        showItems(todos)
-        editItems(todos)
+    todos.push(newItem)
+    itemInput.value = ``
+    showList()
+    //editItems()
+    //handleClick(e)
+})
+
+//form controller
+itemList.addEventListener('click', e => {
+    if (e.target.classList.contains('fa-times-circle')) {
+        let selectedItem = e.target.parentNode.parentNode.parentNode
+        //console.log(e.target.parentNode.parentNode.parentNode);
+        selectedItem.remove()
+        console.log(selectedItem.textContent);
+        filteredTodos = todos.filter(item => {
+            return item !== selectedItem.textContent
+        })
+        todos = filteredTodos
+        console.log(filteredTodos);
     }
 })
 
-//display items in list
-function showItems(todos) {
-    itemList.textContent = `` //this clears the html totaly. before it was duplicating our list
-    //basically we were rendering the list, then rendering it again. now we clear it fully then render it --- took me all night to figure that out
-    todos.forEach(todo => {
-        itemList.insertAdjacentHTML('beforeend', `<div class="item my-3"><h5 class="item-name text-capitalize">${todo}</h5><div class="item-icons"><a href="#" class="complete-item mx-2 item-icon"><i class="far fa-check-circle"></i></a><a href="#" class="edit-item mx-2 item-icon"><i class="far fa-edit"></i></a><a href="#" class="delete-item item-icon"><i class="far fa-times-circle"></i></a></div></div>`)
+//const deleteItem = document.querySelectorAll('.delete-item')
+
+// function handleClick(e) {
+//     console.log(e);
+//     if (e.target.name == deleteItem) {
+//         console.log(`yes`);
+//     }
+// }
+
+// function editItems() {
+
+//     const items = itemList.querySelectorAll('.item')
+//     //select each item
+//     items.forEach(item => {
+//         if (item.querySelector('.item-name').textContent == ) {
+//             //select each button //add event listeners to each button
+//             item.querySelector('.delete-item').addEventListener('click', e => {
+//                 itemList.removeChild(item)
+//                 // todos = todos.filter(item => {
+//                 //     return item !== newItem
+//                 // })
+//             })
+//         }
+
+
+
+
+
+
+
+
+
+//         //execute event
+//         console.log(items);
+
+//     })
+// }
+
+//show item on screen
+function showList() {
+    itemList.textContent = ``
+    todos.forEach(item => {
+        itemList.insertAdjacentHTML('beforeend', `<div class="item my-3"><h5 class="item-name text-capitalize">${item}</h5><div class="item-icons"><a href="#" class="complete-item mx-2 item-icon"><i class="far fa-check-circle"></i></a><a href="#" class="edit-item mx-2 item-icon"><i class="far fa-edit"></i></a><a href="#" class="delete-item item-icon"><i class="far fa-times-circle"></i></a></div></div>`)
     })
 }
 
-//clear items
+//clear all data
 clearButton.addEventListener('click', e => {
     e.preventDefault()
-    todos = []
     itemList.textContent = ``
-    console.log(todos);
+    todos = []
 })
 
-//add controls to the listed items
-function editItems(itemName) {
-
-    const items = itemList.querySelectorAll('.item')//select the list of items
-
-    items.forEach(item => {
-
-        if(item.textContent == itemName)
-        // item.querySelector('.delete-item').addEventListener('click', e => {
-        //     //console.log(`yes`);
-            
-        //     todos.splice(item, 1)
-        //     showItems(todos)
-        //     console.log(todos);
-        // })
-        
-
-        console.log(item); //returns item HTML
-    })
-
-    //console.log(items);
-
-    // todos.forEach(todo => {
-
-
-
-    // })
-
-
-    //console.log(newItem);
-}
-
-editItems(todos)
-//save items to LS
+console.log(todos);
 
 
 
