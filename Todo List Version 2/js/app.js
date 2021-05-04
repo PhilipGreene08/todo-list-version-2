@@ -17,6 +17,7 @@ form.addEventListener('submit', e => {
     showList()
     //editItems()
     //handleClick(e)
+    setLocalStorage()
 })
 
 //form controller
@@ -33,6 +34,7 @@ itemList.addEventListener('click', e => {
         })
         todos = filteredTodos
         console.log(filteredTodos);
+        setLocalStorage()
     }
 
     if (e.target.classList.contains('fa-edit')) {
@@ -43,10 +45,12 @@ itemList.addEventListener('click', e => {
         })
         todos = filteredTodos
         console.log(filteredTodos);
+        setLocalStorage()
     }
 
-    if(e.target.classList.contains('fa-check-circle')) {
+    if (e.target.classList.contains('fa-check-circle')) {
         selectedItem.classList.toggle('completed')
+        setLocalStorage()
     }
 })
 
@@ -74,14 +78,6 @@ itemList.addEventListener('click', e => {
 //             })
 //         }
 
-
-
-
-
-
-
-
-
 //         //execute event
 //         console.log(items);
 
@@ -101,10 +97,20 @@ clearButton.addEventListener('click', e => {
     e.preventDefault()
     itemList.textContent = ``
     todos = []
+    setLocalStorage()
 })
 
 console.log(todos);
 
+function setLocalStorage() {
+    localStorage.setItem('todos', todos)
+}
+
+//Things to do still
+//save to LS
+//get from ls
+//set ls
+//remove from ls
 
 
 
