@@ -21,8 +21,10 @@ form.addEventListener('submit', e => {
 
 //form controller
 itemList.addEventListener('click', e => {
+    let selectedItem = e.target.parentNode.parentNode.parentNode
+
     if (e.target.classList.contains('fa-times-circle')) {
-        let selectedItem = e.target.parentNode.parentNode.parentNode
+
         //console.log(e.target.parentNode.parentNode.parentNode);
         selectedItem.remove()
         console.log(selectedItem.textContent);
@@ -31,6 +33,20 @@ itemList.addEventListener('click', e => {
         })
         todos = filteredTodos
         console.log(filteredTodos);
+    }
+
+    if (e.target.classList.contains('fa-edit')) {
+        selectedItem.remove()
+        itemInput.value = selectedItem.textContent
+        filteredTodos = todos.filter(item => {
+            return item !== selectedItem.textContent
+        })
+        todos = filteredTodos
+        console.log(filteredTodos);
+    }
+
+    if(e.target.classList.contains('fa-check-circle')) {
+        selectedItem.classList.toggle('completed')
     }
 })
 
@@ -88,7 +104,6 @@ clearButton.addEventListener('click', e => {
 })
 
 console.log(todos);
-
 
 
 
