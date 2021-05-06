@@ -107,7 +107,7 @@ function setLocalStorage() {
 }
 
 //Things to do still
-//save to LS
+
 //get from ls
 //set ls
 //remove from ls
